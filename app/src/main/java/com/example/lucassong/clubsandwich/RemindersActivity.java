@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -39,10 +40,12 @@ public class RemindersActivity extends AppCompatActivity {
         eventID = getIntent().getIntExtra("eventID", 0);
 
         title = findViewById(R.id.event_name);
+
         title.setText(eventName);
 
         recyclerView = findViewById(R.id.recycler_view);
         adapter = new ReminderAdapter(new ArrayList<Reminder>());
+        adapter.setContext(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setAdapter(adapter);
@@ -54,7 +57,7 @@ public class RemindersActivity extends AppCompatActivity {
         viewModel.getReminderList().observe(RemindersActivity.this, new Observer<List<Reminder>>() {
             @Override
             public void onChanged(@Nullable List<Reminder> reminders) {
-                adapter.addItems(reminders);
+                adapter.updateItems(reminders);
             }
         });
 
@@ -65,6 +68,7 @@ public class RemindersActivity extends AppCompatActivity {
                 //Log.d(TAG,"onClick: pressed!");
                 Intent intent = new Intent(RemindersActivity.this, AddReminderActivity.class);
                 intent.putExtra("eventID", eventID);
+                intent.putExtra("existingReminder", false);
                 startActivity(intent);
             }
         });

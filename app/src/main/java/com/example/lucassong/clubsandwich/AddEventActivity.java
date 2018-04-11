@@ -215,7 +215,7 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
                     finish();
                     */
 
-                    startActivity(new Intent(AddEventActivity.this, CalendarActivity.class));
+                    finish();
                 }
             }
         });

@@ -1,5 +1,7 @@
 package com.example.lucassong.clubsandwich;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +18,8 @@ import java.util.List;
  */
 
 public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHolder> {
+
+    private Context context;
 
     private static final String TAG = "ReminderAdapter";
     private List<Reminder> reminders;
@@ -35,6 +39,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     public void onBindViewHolder(ViewHolder holder, int position) {
         Reminder reminder = reminders.get(position);
         String timeBeforeAlert = minutesFormatter(reminder.getMinutesBeforeAlert());
+        holder.reminderID = reminder.getReminderID();
         holder.minutesBeforeAlert.setText(timeBeforeAlert);
     }
 
@@ -43,13 +48,15 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         return reminders.size();
     }
 
-    public void addItems(List<Reminder> reminders) {
+    public void updateItems(List<Reminder> reminders) {
         this.reminders = reminders;
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        public int reminderID;
+        public int eventID;
         public TextView minutesBeforeAlert;
 
         public ViewHolder(View itemView) {
@@ -57,19 +64,21 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
 
             minutesBeforeAlert = itemView.findViewById(R.id.minutes_before_alert);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View view)
-                {
-                    Log.d("LongClickTest", "LONG CLICKED!");
-                    return true;
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, AddReminderActivity.class);
+                    intent.putExtra("eventID", eventID);
+                    intent.putExtra("existingReminder", true);
+                    intent.putExtra("reminderID", reminderID);
+                    context.startActivity(intent);
                 }
             });
         }
     }
 
     private String minutesFormatter(long minutesBeforeAlert) {
-        
+
         long minutes = minutesBeforeAlert % 60;
         long hours = 0;
         long days = 0;
@@ -136,5 +145,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         }
 
         return displayText;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

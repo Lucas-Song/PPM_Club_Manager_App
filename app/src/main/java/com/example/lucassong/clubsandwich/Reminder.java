@@ -15,12 +15,13 @@ import java.util.Date;
 @Entity(tableName = "reminder")
 public class Reminder {
 
-    public Reminder(int eventID, long minutesBeforeAlert) {
+    public Reminder(int reminderID, int eventID, long minutesBeforeAlert) {
+        this.reminderID = reminderID;
         this.eventID = eventID;
         this.minutesBeforeAlert = minutesBeforeAlert;
     }
 
-    @PrimaryKey(autoGenerate = true)
+    @PrimaryKey
     @ColumnInfo(name = "reminder_ID")
     private int reminderID;
 

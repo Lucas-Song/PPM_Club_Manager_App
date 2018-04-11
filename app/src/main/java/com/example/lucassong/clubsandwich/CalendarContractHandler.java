@@ -239,7 +239,8 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                 Log.d("OOPS","No Calendar ID");
                 createCalendar(activity, context);
                 calId = getCalendarId(activity, context);
-                //return;
+                Toast.makeText(context, "Calendar not found, please try again", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             ContentValues eventValues = new ContentValues();
@@ -317,7 +318,7 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                                         "((" + CalendarContract.Events.CALENDAR_ID + " = ?))",
                                         new String[]{"" + getCalendarId(activity, context)},
                                         null);
-                //DO STUFF HERE
+
                 final int _ID = 0;
                 final int TITLE = 1;
                 final int DESCRIPTION = 2;
@@ -351,7 +352,7 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                             cursor.getString(RRULE)
                     ));
                 }
-                //YEAHHHHHHHHH
+
             }
         }
     }
@@ -364,7 +365,8 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                 Log.d("OOPS","No Calendar ID");
                 createCalendar(activity, context);
                 calId = getCalendarId(activity, context);
-                //return;
+                Toast.makeText(context, "Calendar not found, please try again", Toast.LENGTH_SHORT).show();
+                return;
             }
 
             ContentValues reminderValues = new ContentValues();
@@ -386,11 +388,79 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
         }
     }
 
+    public static void editReminderInCalendar(Activity activity, Context context, int reminderID, long minutes) {
+        if (hasCalendarPermissions(activity, context)) {
+
+            long calId = getCalendarId(activity, context);
+            if (calId == -1) {
+                Log.d("OOPS","No Calendar ID");
+                createCalendar(activity, context);
+                calId = getCalendarId(activity, context);
+                Toast.makeText(context, "Calendar not found, please try again", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            ContentValues updatedValues = new ContentValues();
+            updatedValues.put(CalendarContract.Reminders.MINUTES, minutes);
+            String[] selArgs =
+                    new String[]{Long.toString(reminderID)};
+
+            if ((ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_CALENDAR)
+                    == PackageManager.PERMISSION_GRANTED) &&
+                    (ContextCompat.checkSelfPermission(context,
+                            Manifest.permission.WRITE_CALENDAR)
+                            == PackageManager.PERMISSION_GRANTED)) {
+
+                context.getContentResolver().update(
+                        CalendarContract.Reminders.CONTENT_URI,
+                        updatedValues,
+                        CalendarContract.Reminders._ID + " =? ",
+                        selArgs);
+            } else {
+                Toast.makeText(context, "Calendar permissions needed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    public static void deleteReminderInCalendar(Activity activity, Context context, int reminderID) {
+        if (hasCalendarPermissions(activity, context)) {
+
+            long calId = getCalendarId(activity, context);
+            if (calId == -1) {
+                Log.d("OOPS","No Calendar ID");
+                createCalendar(activity, context);
+                calId = getCalendarId(activity, context);
+                Toast.makeText(context, "Calendar not found, please try again", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            String[] selArgs =
+                    new String[]{Long.toString(reminderID)};
+
+            if ((ContextCompat.checkSelfPermission(context,
+                    Manifest.permission.READ_CALENDAR)
+                    == PackageManager.PERMISSION_GRANTED) &&
+                    (ContextCompat.checkSelfPermission(context,
+                            Manifest.permission.WRITE_CALENDAR)
+                            == PackageManager.PERMISSION_GRANTED)) {
+
+                context.getContentResolver().delete(
+                        CalendarContract.Reminders.CONTENT_URI,
+                        CalendarContract.Reminders._ID + " =? ",
+                        selArgs);
+            } else {
+                Toast.makeText(context, "Calendar permissions needed", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
     public static void getReminders(Activity activity, Context context, FragmentActivity fragmentActivity, int eventID) {
 
         if (hasCalendarPermissions(activity, context)) {
 
             String[] proj = new String[]{
+                    CalendarContract.Reminders._ID,
                     CalendarContract.Reminders.MINUTES
             };
 
@@ -405,14 +475,16 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                                         CalendarContract.Reminders.EVENT_ID + " = ? ",
                                         new String[]{"" + eventID},
                                         null);
-                //DO STUFF HERE
-                final int MINUTES = 0;
+
+                final int _ID = 0;
+                final int MINUTES = 1;
 
                 AddReminderViewModel addReminderViewModel = ViewModelProviders.of(fragmentActivity).get(AddReminderViewModel.class);
 
                 while (cursor.moveToNext()) {
 
                     addReminderViewModel.addReminder(new Reminder(
+                            cursor.getInt(_ID),
                             eventID,
                             cursor.getLong(MINUTES)
                     ));

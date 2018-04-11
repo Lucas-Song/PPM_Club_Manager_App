@@ -31,7 +31,12 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
 
     private static final String TAG = "AddReminderActivity";
 
+    private int reminderID;
     private int eventID;
+    private boolean existingReminder;
+
+    private TextView title;
+    private Button deleteButton;
 
     private EditText number;
 
@@ -47,11 +52,24 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_reminder);
 
+        reminderID = getIntent().getIntExtra("reminderID", 0);
         eventID = getIntent().getIntExtra("eventID", 0);
+        existingReminder = getIntent().getBooleanExtra("existingReminder", false);
+
+        title = findViewById(R.id.title);
 
         number = findViewById(R.id.number);
 
         saveButton = findViewById(R.id.save_button);
+        deleteButton = findViewById(R.id.delete_button);
+
+        if (existingReminder) {
+            title.setText("Edit reminder:");
+            deleteButton.setText("Delete Reminder");
+        } else {
+            title.setText("Add reminder:");
+            deleteButton.setText("Cancel Reminder");
+        }
 
         addReminderViewModel = ViewModelProviders.of(this).get(AddReminderViewModel.class);
 
@@ -79,17 +97,43 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
                             minutes *= (60*24*7);
                         }
 
-                        CalendarContractHandler.addReminderToCalendar(
-                                AddReminderActivity.this,
-                                AddReminderActivity.this,
-                                eventID,
-                                minutes
-                        );
+                        if (existingReminder) {
+                            CalendarContractHandler.editReminderInCalendar(
+                                    AddReminderActivity.this,
+                                    AddReminderActivity.this,
+                                    reminderID,
+                                    minutes
+                            );
+                        } else {
+                            CalendarContractHandler.addReminderToCalendar(
+                                    AddReminderActivity.this,
+                                    AddReminderActivity.this,
+                                    eventID,
+                                    minutes
+                            );
+                        }
+
                     }
 
                     CalendarContractHandler.updateRemindersView(AddReminderActivity.this, AddReminderActivity.this, AddReminderActivity.this, eventID);
 
-                    startActivity(new Intent(AddReminderActivity.this, RemindersActivity.class));
+                    finish();
+                }
+            }
+        });
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (CalendarContractHandler.hasCalendarPermissions(AddReminderActivity.this, AddReminderActivity.this)) {
+
+                    if (existingReminder) {
+                        CalendarContractHandler.deleteReminderInCalendar(AddReminderActivity.this, AddReminderActivity.this, reminderID);
+
+                        CalendarContractHandler.updateRemindersView(AddReminderActivity.this, AddReminderActivity.this, AddReminderActivity.this, eventID);
+                    }
+
+                    finish();
                 }
             }
         });

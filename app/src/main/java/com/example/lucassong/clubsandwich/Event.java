@@ -32,7 +32,7 @@ public class Event {
 
     //Data declaration
 
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey
     @ColumnInfo(name = "event_ID")
     private int eventID;
 

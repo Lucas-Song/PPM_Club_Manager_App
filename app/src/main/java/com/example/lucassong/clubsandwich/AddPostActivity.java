@@ -65,8 +65,8 @@ public class AddPostActivity extends AppCompatActivity {
                             false,
                             true
                     ));
+
                     finish();
-                    startActivity(new Intent(AddPostActivity.this, MainActivity.class));
                 }
             }
         });

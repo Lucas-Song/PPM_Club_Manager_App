@@ -4,6 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class ReminderViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Reminder>> getReminderList() {
+        //Log.d("SIZE_DEBUG", "OLD SIZE IS " + reminderList.size());
         return reminderList;
     }
 
