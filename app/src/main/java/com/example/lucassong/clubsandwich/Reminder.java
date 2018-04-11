@@ -12,8 +12,7 @@ import java.util.Date;
  * Created by Lucas Song on 21/3/2018.
  */
 
-@Entity(tableName = "reminder", foreignKeys =
-@ForeignKey(entity = Event.class, parentColumns = "event_ID", childColumns = "event_ID"))
+@Entity(tableName = "reminder")
 public class Reminder {
 
     public Reminder(int eventID, long minutesBeforeAlert) {

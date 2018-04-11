@@ -69,7 +69,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
     }
 
     private String minutesFormatter(long minutesBeforeAlert) {
-
+        
         long minutes = minutesBeforeAlert % 60;
         long hours = 0;
         long days = 0;
@@ -87,8 +87,8 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             hours = remainderHours;
         }
         if (days >= 7) {
-            long remainderDays = hours % 7;
-            weeks = (hours - remainderDays) / 7;
+            long remainderDays = days % 7;
+            weeks = (days - remainderDays) / 7;
             days = remainderDays;
         }
 
@@ -100,28 +100,28 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
             }
         }
         if (hours > 0) {
-            if (minutes > 1) {
+            if (hours > 1) {
                 unitsText.add(hours + " hours");
             } else {
                 unitsText.add(hours + " hour");
             }
         }
         if (days > 0) {
-            if (minutes > 1) {
+            if (days > 1) {
                 unitsText.add(days + " days");
             } else {
                 unitsText.add(days + " day");
             }
         }
         if (weeks > 0) {
-            if (minutes > 1) {
+            if (weeks > 1) {
                 unitsText.add(weeks + " weeks");
             } else {
                 unitsText.add(weeks + " week");
             }
         }
 
-        if (unitsText.size() == 1) {
+        if (unitsText.size() >= 1) {
             displayText = unitsText.get(0) + " before";
 
             if (unitsText.size() > 1) {

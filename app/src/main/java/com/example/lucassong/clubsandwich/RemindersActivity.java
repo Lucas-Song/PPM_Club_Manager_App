@@ -47,6 +47,8 @@ public class RemindersActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
+        CalendarContractHandler.updateRemindersView(RemindersActivity.this, RemindersActivity.this, RemindersActivity.this, eventID);
+
         viewModel = ViewModelProviders.of(this).get(ReminderViewModel.class);
 
         viewModel.getReminderList().observe(RemindersActivity.this, new Observer<List<Reminder>>() {
