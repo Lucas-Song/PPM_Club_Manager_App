@@ -12,6 +12,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.lucassong.clubsandwich.post.Post;
+import com.example.lucassong.clubsandwich.post.PostAdapter;
+import com.example.lucassong.clubsandwich.post.PostViewModel;
+import com.example.lucassong.clubsandwich.post_add.AddPostActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 

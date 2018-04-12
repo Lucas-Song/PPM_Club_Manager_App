@@ -1,4 +1,4 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.reminder;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;
@@ -14,23 +14,20 @@ import java.util.List;
  */
 
 @Dao
-public interface EventDao {
+public interface ReminderDao {
 
-    @Query("SELECT * FROM Event")
-    LiveData<List<Event>> getAllEvents();
+    @Query("SELECT * FROM Reminder")
+    LiveData<List<Reminder>> getAllReminders();
 
-    @Query("SELECT * FROM Event WHERE event_ID LIKE :eventID LIMIT 1")
-    Event findByID(String eventID);
-
-    @Query("DELETE FROM Event")
+    @Query("DELETE FROM Reminder")
     void clearAll();
 
     @Insert
-    void insertAll(Event... events);
+    void insertAll(Reminder... reminders);
 
     @Update
-    void update(Event event);
+    void update(Reminder reminder);
 
     @Delete
-    void delete(Event event);
+    void delete(Reminder reminder);
 }

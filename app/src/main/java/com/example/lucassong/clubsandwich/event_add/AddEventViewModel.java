@@ -1,8 +1,11 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.event_add;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.os.AsyncTask;
+
+import com.example.lucassong.clubsandwich.AppDatabase;
+import com.example.lucassong.clubsandwich.event.Event;
 
 /**
  * Created by Lucas Song on 21/2/2018.

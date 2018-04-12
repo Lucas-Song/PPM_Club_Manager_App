@@ -1,4 +1,4 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.reminder;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;

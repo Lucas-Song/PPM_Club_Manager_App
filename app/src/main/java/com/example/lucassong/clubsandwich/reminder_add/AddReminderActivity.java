@@ -1,27 +1,18 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.reminder_add;
 
-import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
-import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
-import be.billington.calendar.recurrencepicker.RecurrencePickerDialog;
+import com.example.lucassong.clubsandwich.CalendarContractHandler;
+import com.example.lucassong.clubsandwich.R;
 
 /**
  * Created by Lucas Song on 21/2/2018.

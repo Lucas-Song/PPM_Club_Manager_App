@@ -9,10 +9,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.example.lucassong.clubsandwich.reminder.Reminder;
+import com.example.lucassong.clubsandwich.reminder.ReminderAdapter;
+import com.example.lucassong.clubsandwich.reminder.ReminderViewModel;
+import com.example.lucassong.clubsandwich.reminder_add.AddReminderActivity;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,8 +2,6 @@ package com.example.lucassong.clubsandwich;
 
 import android.Manifest;
 import android.app.Activity;
-import android.app.Fragment;
-import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.ContentValues;
 import android.content.Context;
@@ -11,18 +9,22 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.CalendarContract;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.text.LoginFilter;
 import android.text.format.Time;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.lucassong.clubsandwich.event.Event;
+import com.example.lucassong.clubsandwich.event.EventViewModel;
+import com.example.lucassong.clubsandwich.event_add.AddEventViewModel;
+import com.example.lucassong.clubsandwich.reminder.Reminder;
+import com.example.lucassong.clubsandwich.reminder.ReminderViewModel;
+import com.example.lucassong.clubsandwich.reminder_add.AddReminderViewModel;
+
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
 import java.util.TimeZone;
 
 import be.billington.calendar.recurrencepicker.EventRecurrence;

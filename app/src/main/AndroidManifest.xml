@@ -27,19 +27,19 @@
         </activity>
 
         <activity
-            android:name=".AddPostActivity"/>
+            android:name=".post_add.AddPostActivity"/>
 
         <activity
             android:name=".CalendarActivity"/>
 
         <activity
-            android:name=".AddEventActivity"/>
+            android:name=".event_add.AddEventActivity"/>
 
         <activity
             android:name=".RemindersActivity"/>
 
         <activity
-            android:name=".AddReminderActivity"/>
+            android:name=".reminder_add.AddReminderActivity"/>
 
     </application>
 

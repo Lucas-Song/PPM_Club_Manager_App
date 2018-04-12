@@ -1,10 +1,11 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.reminder;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.arch.lifecycle.LiveData;
 import android.os.AsyncTask;
-import android.util.Log;
+
+import com.example.lucassong.clubsandwich.AppDatabase;
 
 import java.util.List;
 

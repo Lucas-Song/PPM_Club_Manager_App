@@ -1,8 +1,11 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.post_add;
 
 import android.app.Application;
 import android.arch.lifecycle.AndroidViewModel;
 import android.os.AsyncTask;
+
+import com.example.lucassong.clubsandwich.AppDatabase;
+import com.example.lucassong.clubsandwich.post.Post;
 
 /**
  * Created by Lucas Song on 16/2/2018.

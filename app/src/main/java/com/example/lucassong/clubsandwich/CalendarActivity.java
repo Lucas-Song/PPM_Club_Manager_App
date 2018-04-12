@@ -11,6 +11,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.example.lucassong.clubsandwich.event.Event;
+import com.example.lucassong.clubsandwich.event.EventAdapter;
+import com.example.lucassong.clubsandwich.event.EventViewModel;
+import com.example.lucassong.clubsandwich.event_add.AddEventActivity;
+
 import java.util.ArrayList;
 import java.util.List;
 

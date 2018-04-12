@@ -1,4 +1,4 @@
-package com.example.lucassong.clubsandwich;
+package com.example.lucassong.clubsandwich.post;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.persistence.room.Dao;

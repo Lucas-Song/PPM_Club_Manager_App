@@ -5,6 +5,13 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.example.lucassong.clubsandwich.event.Event;
+import com.example.lucassong.clubsandwich.event.EventDao;
+import com.example.lucassong.clubsandwich.post.Post;
+import com.example.lucassong.clubsandwich.post.PostDao;
+import com.example.lucassong.clubsandwich.reminder.Reminder;
+import com.example.lucassong.clubsandwich.reminder.ReminderDao;
+
 /**
  * Created by Lucas Song on 15/2/2018.
  */
