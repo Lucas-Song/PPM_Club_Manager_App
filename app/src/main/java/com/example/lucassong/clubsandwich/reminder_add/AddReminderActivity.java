@@ -104,7 +104,6 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
 
                     }
 
-                    Log.d("A_R_A", "eventID passed is " + eventID);
                     CalendarContractHandler.updateRemindersView(AddReminderActivity.this, AddReminderActivity.this, AddReminderActivity.this, eventID);
 
                     finish();

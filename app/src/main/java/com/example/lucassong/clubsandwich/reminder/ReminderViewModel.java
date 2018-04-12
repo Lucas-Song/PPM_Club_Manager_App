@@ -28,7 +28,6 @@ public class ReminderViewModel extends AndroidViewModel {
     }
 
     public LiveData<List<Reminder>> getReminderList() {
-        //Log.d("SIZE_DEBUG", "OLD SIZE IS " + reminderList.size());
         return reminderList;
     }
 

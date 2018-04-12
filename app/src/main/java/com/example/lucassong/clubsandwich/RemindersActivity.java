@@ -62,7 +62,6 @@ public class RemindersActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Reminder> reminders) {
                 adapter.updateItems(reminders);
-                Log.d("R_A", "updateItems() called");
             }
         });
 
@@ -70,7 +69,6 @@ public class RemindersActivity extends AppCompatActivity {
         addReminder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.d(TAG,"onClick: pressed!");
                 Intent intent = new Intent(RemindersActivity.this, AddReminderActivity.class);
                 intent.putExtra("eventID", eventID);
                 intent.putExtra("existingReminder", false);

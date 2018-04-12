@@ -1,12 +1,16 @@
 package com.example.lucassong.clubsandwich.post;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.lucassong.clubsandwich.ClubProfileActivity;
 import com.example.lucassong.clubsandwich.R;
+import com.example.lucassong.clubsandwich.reminder_add.AddReminderActivity;
 
 import java.text.DateFormat;
 import java.util.List;
@@ -16,6 +20,8 @@ import java.util.List;
  */
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
+
+    private Context context;
 
     private static final String TAG = "PostAdapter";
     private List<Post> posts;
@@ -64,6 +70,18 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             timestamp = itemView.findViewById(R.id.timestamp);
             textContent = itemView.findViewById(R.id.text_content);
             photoContent = itemView.findViewById(R.id.photo_content);
+
+            clubName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(context, ClubProfileActivity.class);
+                    context.startActivity(intent);
+                }
+            });
         }
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
     }
 }

@@ -1,4 +1,4 @@
-package com.example.lucassong.clubsandwich.event;
+package com.example.lucassong.clubsandwich.club;
 
 import android.content.Context;
 import android.content.Intent;
@@ -19,80 +19,83 @@ import java.util.List;
  * Created by Lucas Song on 21/2/2018.
  */
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> {
-
+public class ClubAdapter
+        //extends RecyclerView.Adapter<ClubAdapter.ViewHolder>
+        {
+            /*
     private Context context;
 
     private static final String TAG = "ClubAdapter";
-    private List<Event> events;
+    private List<Club> clubs;
     private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("h:mm a, EEEE, d MMMM yyyy");
 
-    public EventAdapter(List<Event> events) {
-        this.events = events;
+    public ClubAdapter(List<Club> clubs) {
+        this.clubs = clubs;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.event_row, parent, false);
+
+        View view;// = LayoutInflater.from(parent.getContext())
+                //.inflate(R.layout.club_row, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Event event = events.get(position);
-        holder.eventID = event.getEventID();
-        holder.eventName.setText(event.getEventName());
-        holder.clubName.setText(event.getClubName());
-        holder.eventDetails.setText(event.getEventDetails());
-        holder.eventLocation.setText(event.getEventLocation());
-        holder.eventStartDateTime.setText(dateTimeFormat.format(event.getEventStartDateTime()));
-        holder.eventEndDateTime.setText(dateTimeFormat.format(event.getEventEndDateTime()));
+        /*
+        Club club = clubs.get(position);
+        holder.clubID = club.getClubID();
+        holder.clubName.setText(club.getClubName());
+        holder.clubName.setText(club.getClubName());
+        holder.clubDetails.setText(club.getClubDetails());
+        holder.clubLocation.setText(club.getClubLocation());
+        holder.clubStartDateTime.setText(dateTimeFormat.format(club.getClubStartDateTime()));
+        holder.clubEndDateTime.setText(dateTimeFormat.format(club.getClubEndDateTime()));
         holder.recurrenceRule.setText(
                 CalendarContractHandler.formatRecurrenceRule(
-                        event.getRecurrenceRule(), holder.recurrenceRule.getContext()
+                        club.getRecurrenceRule(), holder.recurrenceRule.getContext()
                 ));
     }
 
     @Override
     public int getItemCount() {
-        return events.size();
+        return clubs.size();
     }
 
-    public void updateItems(List<Event> events) {
-        this.events = events;
+    public void updateItems(List<Club> clubs) {
+        this.clubs = clubs;
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        public int eventID;
-        public TextView eventName;
+        public int clubID;
         public TextView clubName;
-        public TextView eventDetails;
-        public TextView eventLocation;
-        public TextView eventStartDateTime;
-        public TextView eventEndDateTime;
+        public TextView clubDetails;
+        public TextView clubLocation;
+        public TextView clubStartDateTime;
+        public TextView clubEndDateTime;
         public TextView recurrenceRule;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            eventName = itemView.findViewById(R.id.event_name);
             clubName = itemView.findViewById(R.id.club_name);
-            eventDetails = itemView.findViewById(R.id.event_details);
-            eventLocation = itemView.findViewById(R.id.event_location);
-            eventStartDateTime = itemView.findViewById(R.id.event_start_date_time);
-            eventEndDateTime = itemView.findViewById(R.id.event_end_date_time);
-            recurrenceRule = itemView.findViewById(R.id.event_recurrence_rule);
+            clubName = itemView.findViewById(R.id.club_name);
+            clubDetails = itemView.findViewById(R.id.club_details);
+            clubLocation = itemView.findViewById(R.id.club_location);
+            clubStartDateTime = itemView.findViewById(R.id.club_start_date_time);
+            clubEndDateTime = itemView.findViewById(R.id.club_end_date_time);
+            recurrenceRule = itemView.findViewById(R.id.club_recurrence_rule);
 
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View view)
                 {
                     Intent intent = new Intent(context, RemindersActivity.class);
-                    intent.putExtra("eventName", eventName.getText().toString());
-                    intent.putExtra("eventID", eventID);
+                    intent.putExtra("clubName", clubName.getText().toString());
+                    intent.putExtra("clubID", clubID);
                     context.startActivity(intent);
                     return true;
                 }
@@ -103,4 +106,5 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void setContext(Context context) {
         this.context = context;
     }
+    */
 }

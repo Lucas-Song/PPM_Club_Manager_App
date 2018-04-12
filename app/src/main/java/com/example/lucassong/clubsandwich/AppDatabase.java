@@ -5,6 +5,8 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
+import com.example.lucassong.clubsandwich.club.Club;
+import com.example.lucassong.clubsandwich.club.ClubDao;
 import com.example.lucassong.clubsandwich.event.Event;
 import com.example.lucassong.clubsandwich.event.EventDao;
 import com.example.lucassong.clubsandwich.post.Post;
@@ -16,7 +18,7 @@ import com.example.lucassong.clubsandwich.reminder.ReminderDao;
  * Created by Lucas Song on 15/2/2018.
  */
 
-@Database(entities = {Post.class, Event.class, Reminder.class}, version = 8)
+@Database(entities = {Club.class, Post.class, Event.class, Reminder.class}, version = 9)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;
@@ -38,4 +40,5 @@ public abstract class AppDatabase extends RoomDatabase {
     public abstract PostDao postDao();
     public abstract EventDao eventDao();
     public abstract ReminderDao reminderDao();
+    public abstract ClubDao clubDao();
 }

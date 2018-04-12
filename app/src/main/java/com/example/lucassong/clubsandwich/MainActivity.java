@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recycler_view);
         adapter = new PostAdapter(new ArrayList<Post>());
+        adapter.setContext(this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setAdapter(adapter);
@@ -56,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
         addPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.d(TAG,"onClick: pressed!");
                 startActivity(new Intent(MainActivity.this, AddPostActivity.class));
             }
         });

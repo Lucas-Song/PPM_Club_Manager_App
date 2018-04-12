@@ -460,8 +460,6 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
 
     public static void getReminders(Activity activity, Context context, FragmentActivity fragmentActivity, int eventID) {
 
-        Log.d("C_C_H-G_R", "eventID is " + eventID);
-
         if (hasCalendarPermissions(activity, context)) {
 
             String[] proj = new String[]{
@@ -486,14 +484,7 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
 
                 AddReminderViewModel addReminderViewModel = ViewModelProviders.of(fragmentActivity).get(AddReminderViewModel.class);
 
-                Log.d("C_C_H-G_R","Start getting reminders using cursor");
-                int i = 0;
-
                 while (cursor.moveToNext()) {
-
-                    i++;
-                    Log.d("C_C_H-G_R","Reminder number " + i);
-
                     addReminderViewModel.addReminder(new Reminder(
                             cursor.getInt(_ID),
                             eventID,
@@ -506,9 +497,7 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
 
     public static void updateRemindersView(Activity activity, Context context, FragmentActivity fragmentActivity, int eventID) {
         CalendarContractHandler.clearRemindersCache(activity, context, fragmentActivity);
-        Log.d("C_C_H", "Cleared cache");
         CalendarContractHandler.getReminders(activity, context, fragmentActivity, eventID);
-        Log.d("C_C_H", "Repopulated cache");
     }
 
     public static void clearRemindersCache(Activity activity, Context context, FragmentActivity fragmentActivity) {
