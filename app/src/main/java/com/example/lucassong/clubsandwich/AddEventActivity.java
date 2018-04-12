@@ -75,8 +75,6 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
     private Button setRecurButton;
     private Button saveButton;
 
-    private AddEventViewModel addEventViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -105,8 +103,6 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
         calendar.set(Calendar.SECOND, 0);
         datePickerDialog = new DatePickerDialog(this, AddEventActivity.this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         timePickerDialog = new TimePickerDialog(this, AddEventActivity.this, calendar.get(Calendar.HOUR), calendar.get(Calendar.MINUTE), false);
-
-        addEventViewModel = ViewModelProviders.of(this).get(AddEventViewModel.class);
 
         setStartDateButton.setOnClickListener(new View.OnClickListener() {
             @Override

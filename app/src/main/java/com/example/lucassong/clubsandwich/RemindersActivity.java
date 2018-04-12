@@ -58,6 +58,7 @@ public class RemindersActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Reminder> reminders) {
                 adapter.updateItems(reminders);
+                Log.d("R_A", "updateItems() called");
             }
         });
 

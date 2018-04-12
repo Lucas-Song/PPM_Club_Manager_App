@@ -45,8 +45,6 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
 
     private Button saveButton;
 
-    private AddReminderViewModel addReminderViewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +53,8 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
         reminderID = getIntent().getIntExtra("reminderID", 0);
         eventID = getIntent().getIntExtra("eventID", 0);
         existingReminder = getIntent().getBooleanExtra("existingReminder", false);
+
+        Log.d("A_R_A", "eventID from intent is " + eventID);
 
         title = findViewById(R.id.title);
 
@@ -70,8 +70,6 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
             title.setText("Add reminder:");
             deleteButton.setText("Cancel Reminder");
         }
-
-        addReminderViewModel = ViewModelProviders.of(this).get(AddReminderViewModel.class);
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +113,7 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
 
                     }
 
+                    Log.d("A_R_A", "eventID passed is " + eventID);
                     CalendarContractHandler.updateRemindersView(AddReminderActivity.this, AddReminderActivity.this, AddReminderActivity.this, eventID);
 
                     finish();

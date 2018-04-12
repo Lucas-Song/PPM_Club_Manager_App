@@ -44,7 +44,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         return posts.size();
     }
 
-    public void addItems(List<Post> posts) {
+    public void updateItems(List<Post> posts) {
         this.posts = posts;
         notifyDataSetChanged();
     }

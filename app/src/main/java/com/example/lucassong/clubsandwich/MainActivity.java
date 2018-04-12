@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         viewModel.getPostList().observe(MainActivity.this, new Observer<List<Post>>() {
             @Override
             public void onChanged(@Nullable List<Post> posts) {
-                adapter.addItems(posts);
+                adapter.updateItems(posts);
             }
         });
 

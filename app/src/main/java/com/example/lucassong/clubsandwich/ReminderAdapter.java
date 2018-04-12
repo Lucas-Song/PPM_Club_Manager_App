@@ -40,6 +40,7 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
         Reminder reminder = reminders.get(position);
         String timeBeforeAlert = minutesFormatter(reminder.getMinutesBeforeAlert());
         holder.reminderID = reminder.getReminderID();
+        holder.eventID = reminder.getEventID();
         holder.minutesBeforeAlert.setText(timeBeforeAlert);
     }
 
@@ -68,9 +69,9 @@ public class ReminderAdapter extends RecyclerView.Adapter<ReminderAdapter.ViewHo
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, AddReminderActivity.class);
+                    intent.putExtra("reminderID", reminderID);
                     intent.putExtra("eventID", eventID);
                     intent.putExtra("existingReminder", true);
-                    intent.putExtra("reminderID", reminderID);
                     context.startActivity(intent);
                 }
             });

@@ -44,7 +44,7 @@ public class CalendarActivity extends AppCompatActivity {
         viewModel.getEventList().observe(CalendarActivity.this, new Observer<List<Event>>() {
             @Override
             public void onChanged(@Nullable List<Event> events) {
-                adapter.addItems(events);
+                adapter.updateItems(events);
             }
         });
 
