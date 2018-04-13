@@ -11,6 +11,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.lucassong.clubsandwich.post.Post;
 import com.example.lucassong.clubsandwich.post.PostAdapter;
@@ -24,11 +26,8 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-    private PostViewModel viewModel;
-    private RecyclerView recyclerView;
-    private PostAdapter adapter;
-    private FloatingActionButton addPost;
-    private FloatingActionButton goToCalendar;
+    private Button loginUserButton;
+    private Button loginClubAdminButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,35 +36,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        recyclerView = findViewById(R.id.recycler_view);
-        adapter = new PostAdapter(new ArrayList<Post>());
-        adapter.setContext(this);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        loginUserButton = findViewById(R.id.user_button);
+        loginClubAdminButton = findViewById(R.id.club_admin_button);
 
-        recyclerView.setAdapter(adapter);
-
-        viewModel = ViewModelProviders.of(this).get(PostViewModel.class);
-
-        viewModel.getPostList().observe(MainActivity.this, new Observer<List<Post>>() {
+        loginUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onChanged(@Nullable List<Post> posts) {
-                adapter.updateItems(posts);
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, TimelineActivity.class));
             }
         });
 
-        addPost = findViewById(R.id.add_post);
-        addPost.setOnClickListener(new View.OnClickListener() {
+        loginClubAdminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, AddPostActivity.class));
-            }
-        });
-
-        goToCalendar = findViewById(R.id.go_to_calendar);
-        goToCalendar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, CalendarActivity.class));
+                Toast.makeText(MainActivity.this, "Still under construction", Toast.LENGTH_SHORT).show();
             }
         });
     }
