@@ -14,43 +14,43 @@
         android:padding="12dp">
 
         <TextView
-            android:id="@+id/event_name"
+            android:id="@+id/club_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/club_name"
+            android:id="@+id/club_bio"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/event_details"
+            android:id="@+id/club_meeting_location"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/event_location"
+            android:id="@+id/club_meeting_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/event_start_date_time"
+            android:id="@+id/club_meeting_recurrence_rule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/event_end_date_time"
+            android:id="@+id/club_contact_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>
 
         <TextView
-            android:id="@+id/event_recurrence_rule"
+            android:id="@+id/club_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16sp"/>

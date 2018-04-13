@@ -2,36 +2,38 @@ package com.example.lucassong.clubsandwich;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
+import android.util.Log;
 
-import com.example.lucassong.clubsandwich.event.Event;
+import com.example.lucassong.clubsandwich.club.Club;
+import com.example.lucassong.clubsandwich.club.ClubAdapter;
+import com.example.lucassong.clubsandwich.club.ClubMiniAdapter;
+import com.example.lucassong.clubsandwich.club.ClubViewModel;
 import com.example.lucassong.clubsandwich.event.EventAdapter;
 import com.example.lucassong.clubsandwich.event.EventViewModel;
-import com.example.lucassong.clubsandwich.event_add.AddEventActivity;
+import com.example.lucassong.clubsandwich.reminder.Reminder;
+import com.example.lucassong.clubsandwich.reminder.ReminderAdapter;
+import com.example.lucassong.clubsandwich.reminder.ReminderViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ClubProfileActivity extends AppCompatActivity {
 
-    private EventViewModel viewModel;
+    private ClubViewModel viewModel;
     private RecyclerView recyclerView;
-    private EventAdapter adapter;
-    private FloatingActionButton addEvent;
+    private ClubAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_profile);
 
-        /*
         recyclerView = findViewById(R.id.recycler_view);
         adapter = new ClubAdapter(new ArrayList<Club>());
         adapter.setContext(this);
@@ -39,17 +41,13 @@ public class ClubProfileActivity extends AppCompatActivity {
 
         recyclerView.setAdapter(adapter);
 
-        /*
-        CalendarContractHandler.updateCalendarView(this, this, this);
+        viewModel = ViewModelProviders.of(this).get(ClubViewModel.class);
 
-        viewModel = ViewModelProviders.of(this).get(EventViewModel.class);
-
-        viewModel.getEventList().observe(CalendarActivity.this, new Observer<List<Event>>() {
+        viewModel.getClubList().observe(ClubProfileActivity.this, new Observer<List<Club>>() {
             @Override
-            public void onChanged(@Nullable List<Event> events) {
-                adapter.updateItems(events);
+            public void onChanged(@Nullable List<Club> clubs) {
+                adapter.updateItems(clubs);
             }
         });
-        */
     }
 }

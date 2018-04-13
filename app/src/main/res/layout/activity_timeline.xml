@@ -44,6 +44,14 @@
         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/user_profile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|start"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_myplaces" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

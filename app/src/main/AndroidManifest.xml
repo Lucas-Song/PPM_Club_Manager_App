@@ -50,6 +50,9 @@
         <activity
             android:name=".ClubProfileActivity"/>
 
+        <activity
+            android:name=".UserProfileActivity"/>
+
     </application>
 
 </manifest>

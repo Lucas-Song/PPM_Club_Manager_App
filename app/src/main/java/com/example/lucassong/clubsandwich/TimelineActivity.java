@@ -26,9 +26,11 @@ public class TimelineActivity extends AppCompatActivity {
     private PostViewModel viewModel;
     private RecyclerView recyclerView;
     private PostAdapter adapter;
+
     private FloatingActionButton addPost;
     private FloatingActionButton goToCalendar;
     private FloatingActionButton createClub;
+    private FloatingActionButton userProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +74,14 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(TimelineActivity.this, AddClubActivity.class));
+            }
+        });
+
+        userProfile = findViewById(R.id.user_profile);
+        userProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TimelineActivity.this, UserProfileActivity.class));
             }
         });
     }
