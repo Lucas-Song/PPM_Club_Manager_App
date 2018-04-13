@@ -28,19 +28,27 @@
     </android.support.constraint.ConstraintLayout>
 
     <android.support.design.widget.FloatingActionButton
+        android:id="@+id/create_club"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_input_get" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/go_to_calendar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_margin="@dimen/fab_margin"
+        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+
+    <android.support.design.widget.FloatingActionButton
         android:id="@+id/add_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_input_add" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/go_to_calendar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
 </android.support.design.widget.CoordinatorLayout>

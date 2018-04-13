@@ -12,6 +12,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.example.lucassong.clubsandwich.club_add.AddClubActivity;
 import com.example.lucassong.clubsandwich.post.Post;
 import com.example.lucassong.clubsandwich.post.PostAdapter;
 import com.example.lucassong.clubsandwich.post.PostViewModel;
@@ -27,6 +28,7 @@ public class TimelineActivity extends AppCompatActivity {
     private PostAdapter adapter;
     private FloatingActionButton addPost;
     private FloatingActionButton goToCalendar;
+    private FloatingActionButton createClub;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,14 @@ public class TimelineActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(TimelineActivity.this, CalendarActivity.class));
+            }
+        });
+
+        createClub = findViewById(R.id.create_club);
+        createClub.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(TimelineActivity.this, AddClubActivity.class));
             }
         });
     }

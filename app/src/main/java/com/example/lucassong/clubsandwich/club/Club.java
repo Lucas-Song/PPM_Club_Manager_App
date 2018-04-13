@@ -3,7 +3,12 @@ package com.example.lucassong.clubsandwich.club;
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+
+import com.example.lucassong.clubsandwich.DateConverter;
+
+import java.util.Date;
 
 /**
  * Created by Lucas Song on 2/3/2018.
@@ -13,11 +18,14 @@ import android.support.annotation.NonNull;
 public class Club {
 
     public Club(String clubName, String bio, String meetingLocation,
-                String meetingTime, String clubContactNumber, String clubEmail) {
+                Date firstMeetingDate, Date meetingTime, String recurrenceRule,
+                String clubContactNumber, String clubEmail) {
         this.clubName = clubName;
         this.bio = bio;
         this.meetingLocation = meetingLocation;
+        this.firstMeetingDate = firstMeetingDate;
         this.meetingTime = meetingTime;
+        this.recurrenceRule = recurrenceRule;
         this.clubContactNumber = clubContactNumber;
         this.clubEmail = clubEmail;
     }
@@ -27,14 +35,22 @@ public class Club {
     @ColumnInfo(name = "club_name")
     private String clubName;
 
-    @ColumnInfo(name = "bio")
+    @ColumnInfo(name = "club_bio")
     private String bio;
 
-    @ColumnInfo(name = "meeting_location")
+    @ColumnInfo(name = "club_meeting_location")
     private String meetingLocation;
 
-    @ColumnInfo(name = "meeting_time")
-    private String meetingTime;
+    @ColumnInfo(name = "club_first_meeting_date")
+    @TypeConverters(DateConverter.class)
+    private Date firstMeetingDate;
+    
+    @ColumnInfo(name = "club_meeting_time")
+    @TypeConverters(DateConverter.class)
+    private Date meetingTime;
+
+    @ColumnInfo(name = "club_meeting_recurrence_rule")
+    private String recurrenceRule;
 
     @ColumnInfo(name = "club_contact_number")
     private String clubContactNumber;
@@ -66,12 +82,28 @@ public class Club {
         this.meetingLocation = meetingLocation;
     }
 
-    public String getMeetingTime() {
+    public Date getFirstMeetingDate() {
+        return firstMeetingDate;
+    }
+
+    public void setFirstMeetingDate(Date firstMeetingDate) {
+        this.firstMeetingDate = firstMeetingDate;
+    }
+
+    public Date getMeetingTime() {
         return meetingTime;
     }
 
-    public void setMeetingTime(String meetingTime) {
+    public void setMeetingTime(Date meetingTime) {
         this.meetingTime = meetingTime;
+    }
+
+    public String getRecurrenceRule() {
+        return recurrenceRule;
+    }
+
+    public void setRecurrenceRule(String recurrenceRule) {
+        this.recurrenceRule = recurrenceRule;
     }
 
     public String getClubContactNumber() {

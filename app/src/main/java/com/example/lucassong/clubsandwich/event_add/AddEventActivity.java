@@ -29,7 +29,7 @@ import be.billington.calendar.recurrencepicker.RecurrencePickerDialog;
 
 public class AddEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
-    private static final String TAG = "AddEventActivity";
+    private static final String TAG = "AddClubActivity";
 
     private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("h:mm a, EEEE, d MMMM yyyy");
 

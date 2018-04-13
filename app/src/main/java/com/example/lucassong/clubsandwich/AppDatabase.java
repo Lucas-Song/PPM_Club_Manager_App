@@ -18,7 +18,7 @@ import com.example.lucassong.clubsandwich.reminder.ReminderDao;
  * Created by Lucas Song on 15/2/2018.
  */
 
-@Database(entities = {Club.class, Post.class, Event.class, Reminder.class}, version = 9)
+@Database(entities = {Club.class, Post.class, Event.class, Reminder.class}, version = 11)
 public abstract class AppDatabase extends RoomDatabase {
 
     private static AppDatabase INSTANCE;

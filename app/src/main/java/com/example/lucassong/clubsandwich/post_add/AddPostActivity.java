@@ -20,7 +20,7 @@ import java.util.Date;
 
 public class AddPostActivity extends AppCompatActivity {
 
-    private static final String TAG = "AddPostActivity";
+    private static final String TAG = "AddClubActivity";
 
     private Date timestamp;
 

@@ -45,8 +45,6 @@ public class AddReminderActivity extends AppCompatActivity implements ActivityCo
         eventID = getIntent().getIntExtra("eventID", 0);
         existingReminder = getIntent().getBooleanExtra("existingReminder", false);
 
-        Log.d("A_R_A", "eventID from intent is " + eventID);
-
         title = findViewById(R.id.title);
 
         number = findViewById(R.id.number);

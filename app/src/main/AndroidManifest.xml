@@ -45,6 +45,9 @@
             android:name=".reminder_add.AddReminderActivity"/>
 
         <activity
+            android:name=".club_add.AddClubActivity"/>
+
+        <activity
             android:name=".ClubProfileActivity"/>
 
     </application>
