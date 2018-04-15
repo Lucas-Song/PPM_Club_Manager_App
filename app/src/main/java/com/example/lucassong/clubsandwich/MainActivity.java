@@ -1,30 +1,15 @@
 package com.example.lucassong.clubsandwich;
 
-import android.arch.lifecycle.Observer;
-import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-
-import com.example.lucassong.clubsandwich.post.Post;
-import com.example.lucassong.clubsandwich.post.PostAdapter;
-import com.example.lucassong.clubsandwich.post.PostViewModel;
-import com.example.lucassong.clubsandwich.post_add.AddPostActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
-    private static final String TAG = "MainActivity";
 
     private Button loginUserButton;
     private Button loginClubAdminButton;
@@ -39,9 +24,15 @@ public class MainActivity extends AppCompatActivity {
         loginUserButton = findViewById(R.id.user_button);
         loginClubAdminButton = findViewById(R.id.club_admin_button);
 
+        Context context = MainActivity.this;
+        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.username_pref_file_key), Context.MODE_PRIVATE);
+        final SharedPreferences.Editor editor = sharedPref.edit();
+
         loginUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                editor.putString(getString(R.string.username_pref_file_key), "user");
+                editor.commit();
                 startActivity(new Intent(MainActivity.this, TimelineActivity.class));
             }
         });
@@ -49,7 +40,9 @@ public class MainActivity extends AppCompatActivity {
         loginClubAdminButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Still under construction", Toast.LENGTH_SHORT).show();
+                editor.putString(getString(R.string.username_pref_file_key), "admin");
+                editor.commit();
+                startActivity(new Intent(MainActivity.this, TimelineActivity.class));
             }
         });
     }

@@ -22,9 +22,9 @@ public class AddPostActivity extends AppCompatActivity {
 
     private static final String TAG = "AddClubActivity";
 
+    private String clubName;
     private Date timestamp;
 
-    private EditText clubName;
     private EditText textContent;
     private EditText photoContent;
 
@@ -37,7 +37,8 @@ public class AddPostActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_post);
 
-        clubName = findViewById(R.id.club_name);
+        clubName = getIntent().getStringExtra("clubName");
+
         textContent = findViewById(R.id.text_content);
         photoContent = findViewById(R.id.photo_content);
 
@@ -51,14 +52,12 @@ public class AddPostActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Log.d(TAG, "onClick: firstName: " + firstName.getText().toString());
-                if (clubName.getText() == null
-                        || textContent.getText() == null
-                        || photoContent.getText() == null) {
+                if (clubName == null || textContent.getText() == null || photoContent.getText() == null) {
                     Toast.makeText(AddPostActivity.this, "Missing fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
                     addPostViewModel.addPost(new Post(
-                            clubName.getText().toString(),
+                            clubName,
                             timestamp,
                             textContent.getText().toString(),
                             photoContent.getText().toString(),

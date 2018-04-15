@@ -13,6 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
         app:srcCompat="@android:drawable/ic_input_add" />
 
     <android.support.design.widget.FloatingActionButton
@@ -21,6 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
         android:layout_margin="@dimen/fab_margin"
+        android:visibility="invisible"
         app:srcCompat="@android:drawable/ic_menu_my_calendar" />
 
     <android.support.v7.widget.RecyclerView

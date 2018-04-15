@@ -31,6 +31,8 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
 
     private static final String TAG = "AddClubActivity";
 
+    private String clubName;
+
     private SimpleDateFormat dateTimeFormat = new SimpleDateFormat("h:mm a, EEEE, d MMMM yyyy");
 
     private TextView startDateTimeText;
@@ -51,7 +53,6 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
     private Calendar calendar;
     private String recurrenceRule;
 
-    private EditText clubName;
     private EditText eventName;
     private EditText eventDetails;
     private EditText eventLocation;
@@ -68,9 +69,10 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_event);
 
+        clubName = getIntent().getStringExtra("clubName");
+
         recurText = findViewById(R.id.recur_text);
 
-        clubName = findViewById(R.id.club_name);
         eventName = findViewById(R.id.event_name);
         eventDetails = findViewById(R.id.event_details);
         eventLocation = findViewById(R.id.event_location);
@@ -159,7 +161,7 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onClick(View view) {
                 //Log.d(TAG, "onClick: firstName: " + firstName.getText().toString());
-                if (clubName.getText() == null
+                if (clubName == null
                         || eventName.getText() == null
                         || eventDetails.getText() == null
                         || eventStartDate == null
@@ -174,7 +176,7 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
                         CalendarContractHandler.addEventToCalendar(
                                 AddEventActivity.this,
                                 AddEventActivity.this,
-                                clubName.getText().toString(),
+                                clubName,
                                 eventName.getText().toString(),
                                 eventDetails.getText().toString(),
                                 eventLocation.getText().toString(),
@@ -185,19 +187,6 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
                     }
 
                     CalendarContractHandler.updateCalendarView(AddEventActivity.this, AddEventActivity.this, AddEventActivity.this);
-
-                    /* OUTDATED BLOCK, ERRORS
-                    addEventViewModel.addEvent(new Event(
-                            clubName.getText().toString(),
-                            eventName.getText().toString(),
-                            eventDetails.getText().toString(),
-                            eventLocation.getText().toString(),
-                            CalendarContractHandler.combine(eventStartDate, eventStartTime),
-                            CalendarContractHandler.combine(eventEndDate, eventEndTime),
-                            recurrenceRule
-                    ));
-                    finish();
-                    */
 
                     finish();
                 }

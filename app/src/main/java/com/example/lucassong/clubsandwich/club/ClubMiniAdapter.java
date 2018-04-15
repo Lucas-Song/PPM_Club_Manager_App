@@ -64,8 +64,7 @@ public class ClubMiniAdapter extends RecyclerView.Adapter<ClubMiniAdapter.ViewHo
                 public void onClick(View view)
                 {
                     Intent intent = new Intent(context, ClubProfileActivity.class);
-                    //intent.putExtra("clubName", clubName.getText().toString());
-                    //intent.putExtra("clubID", clubID);
+                    intent.putExtra("clubName", clubName.getText().toString());
                     context.startActivity(intent);
                 }
             });

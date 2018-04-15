@@ -2,7 +2,9 @@ package com.example.lucassong.clubsandwich;
 
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
@@ -33,6 +35,8 @@ public class ClubProfileActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ClubAdapter adapter;
 
+    private String clubName;
+
     private FloatingActionButton addPost;
     private FloatingActionButton addEvent;
 
@@ -40,6 +44,8 @@ public class ClubProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_club_profile);
+
+        clubName = getIntent().getStringExtra("clubName");
 
         recyclerView = findViewById(R.id.recycler_view);
         adapter = new ClubAdapter(new ArrayList<Club>());
@@ -56,20 +62,32 @@ public class ClubProfileActivity extends AppCompatActivity {
             }
         });
 
-        addPost = findViewById(R.id.add_post);
-        addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ClubProfileActivity.this, AddPostActivity.class));
-            }
-        });
+        Context context = ClubProfileActivity.this;
+        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.username_pref_file_key), Context.MODE_PRIVATE);
+        String username = sharedPref.getString(getString(R.string.username_pref_file_key), null);
 
-        addEvent = findViewById(R.id.add_event);
-        addEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(ClubProfileActivity.this, AddEventActivity.class));
-            }
-        });
+        if (username.equals("admin")) {
+            addPost = findViewById(R.id.add_post);
+            addPost.setVisibility(View.VISIBLE);
+            addPost.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ClubProfileActivity.this, AddPostActivity.class);
+                    intent.putExtra("clubName", clubName);
+                    startActivity(intent);
+                }
+            });
+
+            addEvent = findViewById(R.id.add_event);
+            addEvent.setVisibility(View.VISIBLE);
+            addEvent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(ClubProfileActivity.this, AddEventActivity.class);
+                    intent.putExtra("clubName", clubName);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 }
