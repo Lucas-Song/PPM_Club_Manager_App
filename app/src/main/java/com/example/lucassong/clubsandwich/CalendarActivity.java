@@ -28,7 +28,6 @@ public class CalendarActivity extends AppCompatActivity {
     private EventViewModel viewModel;
     private RecyclerView recyclerView;
     private EventAdapter adapter;
-    private FloatingActionButton addEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +49,6 @@ public class CalendarActivity extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<Event> events) {
                 adapter.updateItems(events);
-            }
-        });
-
-        addEvent = findViewById(R.id.add_event);
-        addEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Log.d(TAG,"onClick: pressed!");
-                startActivity(new Intent(CalendarActivity.this, AddEventActivity.class));
             }
         });
     }

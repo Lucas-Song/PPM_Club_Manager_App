@@ -27,9 +27,7 @@ public class TimelineActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private PostAdapter adapter;
 
-    private FloatingActionButton addPost;
     private FloatingActionButton goToCalendar;
-    private FloatingActionButton createClub;
     private FloatingActionButton userProfile;
 
     @Override
@@ -53,27 +51,11 @@ public class TimelineActivity extends AppCompatActivity {
             }
         });
 
-        addPost = findViewById(R.id.add_post);
-        addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TimelineActivity.this, AddPostActivity.class));
-            }
-        });
-
         goToCalendar = findViewById(R.id.go_to_calendar);
         goToCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(TimelineActivity.this, CalendarActivity.class));
-            }
-        });
-
-        createClub = findViewById(R.id.create_club);
-        createClub.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(TimelineActivity.this, AddClubActivity.class));
             }
         });
 

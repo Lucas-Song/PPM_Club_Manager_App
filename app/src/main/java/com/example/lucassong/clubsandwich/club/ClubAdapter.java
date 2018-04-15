@@ -3,6 +3,7 @@ package com.example.lucassong.clubsandwich.club;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import java.util.List;
  */
 
 public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ViewHolder> {
+
     private Context context;
 
     private static final String TAG = "ClubAdapter";
@@ -31,7 +33,6 @@ public class ClubAdapter extends RecyclerView.Adapter<ClubAdapter.ViewHolder> {
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.club_row, parent, false);
         return new ViewHolder(view);
