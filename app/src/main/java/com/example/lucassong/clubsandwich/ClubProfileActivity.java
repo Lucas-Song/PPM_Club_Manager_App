@@ -60,6 +60,9 @@ public class ClubProfileActivity extends AppCompatActivity {
         SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.username_pref_file_key), Context.MODE_PRIVATE);
         String username = sharedPref.getString(getString(R.string.username_pref_file_key), null);
 
+        //bypassing admin check; supposed to check with db if user is admin for that page
+        username = "admin";
+
         if (username.equals("admin")) {
             addPost = findViewById(R.id.add_post);
             addPost.setVisibility(View.VISIBLE);

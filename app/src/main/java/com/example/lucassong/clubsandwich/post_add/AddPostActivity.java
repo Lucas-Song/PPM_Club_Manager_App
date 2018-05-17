@@ -70,7 +70,8 @@ public class AddPostActivity extends AppCompatActivity {
 
                     addPostViewModel.addPost(newPost);
 
-                    ConnectionHandler.insertPostIntoServer(newPost);
+                    ConnectionHandler connectionHandler = new ConnectionHandler();
+                    connectionHandler.insertPostIntoServer(newPost);
 
                     finish();
                 }

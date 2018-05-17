@@ -11,8 +11,8 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    private Button loginUserButton;
-    private Button loginClubAdminButton;
+    private Button loginLinkButton;
+    private Button registerLinkButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,30 +21,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        loginUserButton = findViewById(R.id.user_button);
-        loginClubAdminButton = findViewById(R.id.club_admin_button);
+        loginLinkButton = findViewById(R.id.login_button);
+        registerLinkButton = findViewById(R.id.register_button);
 
-        Context context = MainActivity.this;
-        SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.username_pref_file_key), Context.MODE_PRIVATE);
-        final SharedPreferences.Editor editor = sharedPref.edit();
-
-        ConnectionHandler.downloadData(this, this, this);
-
-        loginUserButton.setOnClickListener(new View.OnClickListener() {
+        loginLinkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.putString(getString(R.string.username_pref_file_key), "user");
-                editor.commit();
-                startActivity(new Intent(MainActivity.this, TimelineActivity.class));
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
 
-        loginClubAdminButton.setOnClickListener(new View.OnClickListener() {
+        registerLinkButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                editor.putString(getString(R.string.username_pref_file_key), "admin");
-                editor.commit();
-                startActivity(new Intent(MainActivity.this, TimelineActivity.class));
+                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
             }
         });
     }

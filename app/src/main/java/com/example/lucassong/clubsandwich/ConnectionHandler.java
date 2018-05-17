@@ -51,13 +51,13 @@ import static com.example.lucassong.clubsandwich.ConnectionHandler.ObjectType.PO
 public class ConnectionHandler {
     enum ObjectType {CLUB, POST, EVENT};
 
-    public static void downloadData(final Activity activity, final Context context, final FragmentActivity fragmentActivity) {
+    public void downloadData(final Activity activity, final Context context, final FragmentActivity fragmentActivity) {
         getJSON("https://clubsatfcuc.xyz/club.php", activity, context, fragmentActivity, CLUB);
         getJSON("https://clubsatfcuc.xyz/event.php", activity, context, fragmentActivity, EVENT);
         getJSON("https://clubsatfcuc.xyz/post.php", activity, context, fragmentActivity, POST);
     }
 
-    private static void getJSON(final String urlWebService, final Activity activity, final Context context,
+    private void getJSON(final String urlWebService, final Activity activity, final Context context,
                                 final FragmentActivity fragmentActivity, final ObjectType objectType) {
 
         class GetJSON extends AsyncTask<Void, Void, String> {
@@ -130,7 +130,7 @@ public class ConnectionHandler {
         getJSON.execute();
     }
 
-    private static void parseJson(String rawJson, Activity activity, Context context, FragmentActivity fragmentActivity, ObjectType objectType) throws JSONException, ParseException {
+    private void parseJson(String rawJson, Activity activity, Context context, FragmentActivity fragmentActivity, ObjectType objectType) throws JSONException, ParseException {
         ObjectMapper mapper = new ObjectMapper();
 
         if (objectType == CLUB) {
@@ -147,16 +147,39 @@ public class ConnectionHandler {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
+                String clubName = jsonObject.get("clubName").toString();
+                String bio = jsonObject.get("bio").toString();
+                String meetingLocation = jsonObject.get("meetingLocation").toString();
+                Date firstMeetingDate = dateFormat.parse(jsonObject.get("firstMeetingDate").toString());
+                Date clubMeetingTime = timeFormat.parse(jsonObject.get("meetingTime").toString());
+                String recurrenceRule = jsonObject.get("recurrenceRule").toString();
+                String contactNumber = jsonObject.get("clubContactNumber").toString();
+                String email = jsonObject.get("clubEmail").toString();
+
                 addClubViewModel.addClub(new Club(
-                        jsonObject.get("clubName").toString(),
-                        jsonObject.get("bio").toString(),
-                        jsonObject.get("meetingLocation").toString(),
-                        dateFormat.parse(jsonObject.get("firstMeetingDate").toString()),
-                        timeFormat.parse(jsonObject.get("meetingTime").toString()),
-                        jsonObject.get("recurrenceRule").toString(),
-                        jsonObject.get("clubContactNumber").toString(),
-                        jsonObject.get("clubEmail").toString()
+                        clubName,
+                        bio,
+                        meetingLocation,
+                        firstMeetingDate,
+                        clubMeetingTime,
+                        recurrenceRule,
+                        contactNumber,
+                        email
                 ));
+
+                if (CalendarContractHandler.hasCalendarPermissions(activity, context)) {
+                    CalendarContractHandler.addEventToCalendar(
+                            activity,
+                            context,
+                            clubName,
+                            "Meeting",
+                            "Regular meeting for " + jsonObject.get("clubName").toString(),
+                            meetingLocation,
+                            CalendarContractHandler.combine(firstMeetingDate, clubMeetingTime),
+                            CalendarContractHandler.combine(firstMeetingDate, clubMeetingTime),
+                            recurrenceRule
+                    );
+                }
             }
         }
         else if (objectType == POST) {
@@ -209,7 +232,7 @@ public class ConnectionHandler {
         }
     }
 
-    public static void insertEventIntoServer(final Event event) {
+    public void insertEventIntoServer(final Event event) {
         class SendEventData extends AsyncTask<Void, Void, Void> {
 
             @Override
@@ -306,7 +329,7 @@ public class ConnectionHandler {
         sendEventData.execute();
     }
 
-    public static void insertClubIntoServer(final Club club) {
+    public void insertClubIntoServer(final Club club) {
         class SendClubData extends AsyncTask<Void, Void, Void> {
 
             @Override
@@ -400,7 +423,7 @@ public class ConnectionHandler {
         sendClubData.execute();
     }
 
-    public static void insertPostIntoServer(final Post post) {
+    public void insertPostIntoServer(final Post post) {
         class SendPostData extends AsyncTask<Void, Void, Void> {
 
             @Override

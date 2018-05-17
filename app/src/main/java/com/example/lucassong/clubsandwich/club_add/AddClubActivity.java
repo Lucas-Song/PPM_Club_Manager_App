@@ -165,7 +165,8 @@ public class AddClubActivity extends AppCompatActivity implements DatePickerDial
 
                     addClubViewModel.addClub(newClub);
 
-                    ConnectionHandler.insertClubIntoServer(newClub);
+                    ConnectionHandler connectionHandler = new ConnectionHandler();
+                    connectionHandler.insertClubIntoServer(newClub);
 
                     if (CalendarContractHandler.hasCalendarPermissions(AddClubActivity.this, AddClubActivity.this)) {
                         CalendarContractHandler.addEventToCalendar(
@@ -173,7 +174,7 @@ public class AddClubActivity extends AppCompatActivity implements DatePickerDial
                                 AddClubActivity.this,
                                 clubName.getText().toString(),
                                 "Meeting",
-                                "",
+                                "Regular meeting for the " + clubName.getText().toString(),
                                 clubMeetingLocation.getText().toString(),
                                 CalendarContractHandler.combine(firstMeetingDate, clubMeetingTime),
                                 CalendarContractHandler.combine(firstMeetingDate, clubMeetingTime),

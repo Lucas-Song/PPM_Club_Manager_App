@@ -64,7 +64,8 @@ public class AddEventViewModel extends AndroidViewModel {
         protected void onPostExecute(Event event) {
             super.onPostExecute(event);
 
-            ConnectionHandler.insertEventIntoServer(event);
+            ConnectionHandler connectionHandler = new ConnectionHandler();
+            connectionHandler.insertEventIntoServer(event);
         }
     }
 }
