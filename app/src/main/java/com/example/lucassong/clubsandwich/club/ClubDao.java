@@ -20,7 +20,7 @@ public interface ClubDao {
     LiveData<List<Club>> getAllClubs();
 
     @Query("SELECT * FROM Club WHERE club_name LIKE :clubName LIMIT 1")
-    Club findByName(String clubName);
+    LiveData<List<Club>> findByName(String clubName);
 
     @Query("DELETE FROM Club")
     void clearAll();

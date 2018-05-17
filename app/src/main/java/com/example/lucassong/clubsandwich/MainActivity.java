@@ -28,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences sharedPref = context.getSharedPreferences(getString(R.string.username_pref_file_key), Context.MODE_PRIVATE);
         final SharedPreferences.Editor editor = sharedPref.edit();
 
+        ConnectionHandler.downloadData(this, this, this);
+
         loginUserButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

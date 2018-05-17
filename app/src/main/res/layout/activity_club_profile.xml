@@ -7,23 +7,23 @@
     android:layout_height="match_parent"
     tools:context="com.example.lucassong.clubsandwich.ClubProfileActivity">
 
-    <android.support.design.widget.FloatingActionButton
+    <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
         android:id="@+id/add_post"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:fabText="Make New Post" />
 
-    <android.support.design.widget.FloatingActionButton
+    <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
         android:id="@+id/add_event"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
         android:layout_margin="@dimen/fab_margin"
         android:visibility="invisible"
-        app:srcCompat="@android:drawable/ic_menu_my_calendar" />
+        app:fabText="Add Event" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"

@@ -113,41 +113,6 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
         }
     }
 
-    /*
-    private boolean hasReadCalendarPermissions() {
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_CALENDAR)
-                == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        } else {
-            return false;
-
-
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.READ_CALENDAR)) {
-
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-
-            } else {
-
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.READ_CALENDAR},
-                        PERMISSION_REQUEST_CALENDAR);
-
-                // PERMISSION_REQUEST_CALENDAR is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-
-        }
-    }
-    */
-
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
@@ -217,7 +182,8 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
     }
 
     public static String formatRecurrenceRule(String recurrenceRule, Context context) {
-        if (recurrenceRule != null) {
+
+        if (recurrenceRule != null && !recurrenceRule.equals("")) {
             EventRecurrence recurrenceEvent = new EventRecurrence();
             recurrenceEvent.setStartDate(new Time("" + new Date().getTime()));
             recurrenceEvent.parse(recurrenceRule);
@@ -235,7 +201,8 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                                           String eventDetails, String eventLocation,
                                           Date eventStartDateTime, Date eventEndDateTime,
                                           String recurrenceRule) {
-        if (hasCalendarPermissions(activity, context)) {
+        if (hasCalendarPermissions(activity, context) &&
+            !isEventInCalendar(activity, context, eventStartDateTime, eventEndDateTime, eventName + " - " + clubName)) {
 
             long calId = getCalendarId(activity, context);
             if (calId == -1) {
@@ -255,11 +222,8 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
             eventValues.put(CalendarContract.Events.DTEND, eventEndDateTime.getTime());
             eventValues.put(CalendarContract.Events.RRULE, recurrenceRule);
             eventValues.put(CalendarContract.Events.EVENT_TIMEZONE, TimeZone.getDefault().getID());
-
-// reasonable defaults exist:
             //eventValues.put(CalendarContract.Events.ACCESS_LEVEL, CalendarContract.Events.ACCESS_PRIVATE);
-            //eventValues.put(CalendarContract.Events.SELF_ATTENDEE_STATUS,
-            //        CalendarContract.Events.STATUS_CONFIRMED);
+            //eventValues.put(CalendarContract.Events.SELF_ATTENDEE_STATUS, CalendarContract.Events.STATUS_CONFIRMED);
             //eventValues.put(CalendarContract.Events.ALL_DAY, 1);
             //eventValues.put(CalendarContract.Events.ORGANIZER, "some.mail@some.address.com");
             //eventValues.put(CalendarContract.Events.GUESTS_CAN_INVITE_OTHERS, 1);
@@ -277,7 +241,6 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                                 insert(CalendarContract.Events.CONTENT_URI, eventValues);
                 long eventId = new Long(uri.getLastPathSegment());
 
-                Log.d("YAY","eventID is " +eventId);
             } else {
                 Toast.makeText(context, "Calendar permissions needed", Toast.LENGTH_SHORT).show();
             }
@@ -357,6 +320,34 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                 }
 
             }
+        }
+    }
+
+    public static boolean isEventInCalendar(Activity activity, Context context, Date eventStartDateTime, Date eventEndDateTime, String eventName) {
+        if (hasCalendarPermissions(activity, context)) {
+
+            long beginTime = eventStartDateTime.getTime();
+            long endTime = eventEndDateTime.getTime();
+
+            String[] proj =
+                new String[]{
+                    CalendarContract.Instances._ID,
+                    CalendarContract.Instances.BEGIN,
+                    CalendarContract.Instances.END,
+                    CalendarContract.Instances.EVENT_ID};
+
+            Cursor cursor =
+                  CalendarContract.Instances.query(context.getContentResolver(), proj, beginTime, endTime, "\"" + eventName + "\"");
+
+            if (cursor.getCount() > 0) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        else {
+            return true;    //assume it exists if can't access calendar
         }
     }
 

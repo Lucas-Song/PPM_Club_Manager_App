@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+import com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,15 +16,9 @@ import android.view.View;
 
 import com.example.lucassong.clubsandwich.club.Club;
 import com.example.lucassong.clubsandwich.club.ClubAdapter;
-import com.example.lucassong.clubsandwich.club.ClubMiniAdapter;
 import com.example.lucassong.clubsandwich.club.ClubViewModel;
-import com.example.lucassong.clubsandwich.event.EventAdapter;
-import com.example.lucassong.clubsandwich.event.EventViewModel;
 import com.example.lucassong.clubsandwich.event_add.AddEventActivity;
 import com.example.lucassong.clubsandwich.post_add.AddPostActivity;
-import com.example.lucassong.clubsandwich.reminder.Reminder;
-import com.example.lucassong.clubsandwich.reminder.ReminderAdapter;
-import com.example.lucassong.clubsandwich.reminder.ReminderViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +49,7 @@ public class ClubProfileActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         viewModel = ViewModelProviders.of(this).get(ClubViewModel.class);
-        viewModel.getClubList().observe(ClubProfileActivity.this, new Observer<List<Club>>() {
+        viewModel.getClubByName(clubName).observe(ClubProfileActivity.this, new Observer<List<Club>>() {
             @Override
             public void onChanged(@Nullable List<Club> clubs) {
                 adapter.updateItems(clubs);

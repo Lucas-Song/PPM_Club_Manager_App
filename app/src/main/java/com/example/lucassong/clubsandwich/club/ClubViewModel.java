@@ -27,6 +27,10 @@ public class ClubViewModel extends AndroidViewModel {
         clubList = appDatabase.clubDao().getAllClubs();
     }
 
+    public LiveData<List<Club>> getClubByName(String clubName) {
+        return appDatabase.clubDao().findByName(clubName);
+    }
+
     public LiveData<List<Club>> getClubList() {
         return clubList;
     }

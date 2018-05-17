@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.lucassong.clubsandwich.ConnectionHandler;
 import com.example.lucassong.clubsandwich.R;
 import com.example.lucassong.clubsandwich.post.Post;
 
@@ -56,16 +57,20 @@ public class AddPostActivity extends AppCompatActivity {
                     Toast.makeText(AddPostActivity.this, "Missing fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    addPostViewModel.addPost(new Post(
+                    Post newPost = new Post(
                             clubName,
                             timestamp,
                             textContent.getText().toString(),
                             photoContent.getText().toString(),
-                            1,
-                            1,
+                            0,
+                            0,
                             false,
                             true
-                    ));
+                    );
+
+                    addPostViewModel.addPost(newPost);
+
+                    ConnectionHandler.insertPostIntoServer(newPost);
 
                     finish();
                 }

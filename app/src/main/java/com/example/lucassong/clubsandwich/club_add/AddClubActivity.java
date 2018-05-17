@@ -16,6 +16,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.lucassong.clubsandwich.CalendarContractHandler;
+import com.example.lucassong.clubsandwich.ConnectionHandler;
 import com.example.lucassong.clubsandwich.R;
 import com.example.lucassong.clubsandwich.club.Club;
 
@@ -151,7 +152,7 @@ public class AddClubActivity extends AppCompatActivity implements DatePickerDial
                     Toast.makeText(AddClubActivity.this, "Missing fields", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    addClubViewModel.addClub(new Club(
+                    Club newClub = new Club(
                             clubName.getText().toString(),
                             clubBio.getText().toString(),
                             clubMeetingLocation.getText().toString(),
@@ -160,7 +161,11 @@ public class AddClubActivity extends AppCompatActivity implements DatePickerDial
                             recurrenceRule,
                             clubContactNumber.getText().toString(),
                             clubEmail.getText().toString()
-                    ));
+                    );
+
+                    addClubViewModel.addClub(newClub);
+
+                    ConnectionHandler.insertClubIntoServer(newClub);
 
                     if (CalendarContractHandler.hasCalendarPermissions(AddClubActivity.this, AddClubActivity.this)) {
                         CalendarContractHandler.addEventToCalendar(

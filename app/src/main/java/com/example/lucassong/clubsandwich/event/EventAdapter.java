@@ -86,15 +86,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             eventEndDateTime = itemView.findViewById(R.id.event_end_date_time);
             recurrenceRule = itemView.findViewById(R.id.event_recurrence_rule);
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public boolean onLongClick(View view)
+                public void onClick(View view)
                 {
                     Intent intent = new Intent(context, RemindersActivity.class);
                     intent.putExtra("eventName", eventName.getText().toString());
                     intent.putExtra("eventID", eventID);
                     context.startActivity(intent);
-                    return true;
                 }
             });
         }

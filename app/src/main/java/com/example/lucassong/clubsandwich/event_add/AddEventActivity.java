@@ -173,6 +173,7 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
                 }
                 else {
                     if (CalendarContractHandler.hasCalendarPermissions(AddEventActivity.this, AddEventActivity.this)) {
+
                         CalendarContractHandler.addEventToCalendar(
                                 AddEventActivity.this,
                                 AddEventActivity.this,
@@ -187,6 +188,9 @@ public class AddEventActivity extends AppCompatActivity implements DatePickerDia
                     }
 
                     CalendarContractHandler.updateCalendarView(AddEventActivity.this, AddEventActivity.this, AddEventActivity.this);
+
+                    AddEventViewModel addEventViewModel = android.arch.lifecycle.ViewModelProviders.of(AddEventActivity.this).get(AddEventViewModel.class);
+                    addEventViewModel.addEventToServer(eventName.getText().toString());
 
                     finish();
                 }

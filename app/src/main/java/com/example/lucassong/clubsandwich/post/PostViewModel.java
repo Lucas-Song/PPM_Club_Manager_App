@@ -36,6 +36,10 @@ public class PostViewModel extends AndroidViewModel {
         new deleteAsyncTask(appDatabase).execute(post);
     }
 
+    public void deleteAllPosts() {
+        new deleteAllAsyncTask(appDatabase).execute();
+    }
+
     private static class deleteAsyncTask extends AsyncTask<Post, Void, Void> {
 
         private AppDatabase db;
@@ -47,6 +51,21 @@ public class PostViewModel extends AndroidViewModel {
         @Override
         protected Void doInBackground(final Post... params) {
             db.postDao().delete(params[0]);
+            return null;
+        }
+    }
+
+    private static class deleteAllAsyncTask extends AsyncTask<Post, Void, Void> {
+
+        private AppDatabase db;
+
+        deleteAllAsyncTask(AppDatabase appDatabase) {
+            db = appDatabase;
+        }
+
+        @Override
+        protected Void doInBackground(final Post... params) {
+            db.postDao().clearAll();
             return null;
         }
     }

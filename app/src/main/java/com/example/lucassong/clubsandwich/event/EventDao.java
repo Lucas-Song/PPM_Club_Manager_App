@@ -22,6 +22,9 @@ public interface EventDao {
     @Query("SELECT * FROM Event WHERE event_ID LIKE :eventID LIMIT 1")
     Event findByID(String eventID);
 
+    @Query("SELECT * FROM Event WHERE event_name LIKE :eventName LIMIT 1")
+    Event findByName(String eventName);
+
     @Query("DELETE FROM Event")
     void clearAll();
 

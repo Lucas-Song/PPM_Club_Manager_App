@@ -75,6 +75,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(context, ClubProfileActivity.class);
+                    intent.putExtra("clubName", clubName.getText().toString());
                     context.startActivity(intent);
                 }
             });

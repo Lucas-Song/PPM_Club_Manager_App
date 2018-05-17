@@ -22,6 +22,9 @@ public interface PostDao {
     @Query("SELECT * FROM Post WHERE post_ID LIKE :postID LIMIT 1")
     Post findByID(String postID);
 
+    @Query("DELETE FROM Post")
+    void clearAll();
+
     @Insert
     void insertAll(Post... posts);
 
