@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center|end"
         android:layout_margin="@dimen/fab_margin"
-        app:fabText="View Calendar" />
+        app:fabText="View Event List" />
 
     <com.robertlevonyan.views.customfloatingactionbutton.FloatingActionButton
         android:id="@+id/user_profile"
