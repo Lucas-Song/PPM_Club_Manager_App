@@ -298,27 +298,29 @@ public class CalendarContractHandler implements ActivityCompat.OnRequestPermissi
                 while (cursor.moveToNext()) {
                     String s = cursor.getString(TITLE);
                     String[] split = s.split(" - ");
-                    String eventName = split[0];
-                    String clubName;
-                    if (split.length >= 2) {
-                        clubName = split[1];
-                    }
-                    else {
-                        clubName = "Unnamed Club";
-                    }
+                    if (split.length > 1)
+                    {
+                        String eventName = split[0];
+                        String clubName;
+                        if (split.length >= 2) {
+                            clubName = split[1];
+                        }
+                        else {
+                            clubName = "Unnamed Club";
+                        }
 
-                    addEventViewModel.addEvent(new Event(
-                            cursor.getInt(_ID),
-                            clubName,
-                            eventName,
-                            cursor.getString(DESCRIPTION),
-                            cursor.getString(EVENT_LOCATION),
-                            new Date(cursor.getLong(DTSTART)),
-                            new Date(cursor.getLong(DTEND)),
-                            cursor.getString(RRULE)
-                    ));
+                        addEventViewModel.addEvent(new Event(
+                                cursor.getInt(_ID),
+                                clubName,
+                                eventName,
+                                cursor.getString(DESCRIPTION),
+                                cursor.getString(EVENT_LOCATION),
+                                new Date(cursor.getLong(DTSTART)),
+                                new Date(cursor.getLong(DTEND)),
+                                cursor.getString(RRULE)
+                        ));
+                    }
                 }
-
             }
         }
     }

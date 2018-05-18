@@ -195,16 +195,18 @@ public class ConnectionHandler {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
 
-                addPostViewModel.addPost(new Post(
-                        jsonObject.get("clubName").toString(),
-                        dateTimeFormat.parse(jsonObject.get("timeStamp").toString()),
-                        jsonObject.get("text").toString(),
-                        jsonObject.get("photo").toString(),
-                        0,
-                        0,
-                        false,
-                        true
-                ));
+                if (!jsonObject.get("text").toString().equals("")){
+                    addPostViewModel.addPost(new Post(
+                            jsonObject.get("clubName").toString(),
+                            dateTimeFormat.parse(jsonObject.get("timeStamp").toString()),
+                            jsonObject.get("text").toString(),
+                            jsonObject.get("photo").toString(),
+                            0,
+                            0,
+                            false,
+                            true
+                    ));
+                }
             }
         }
         else if (objectType == EVENT) {
